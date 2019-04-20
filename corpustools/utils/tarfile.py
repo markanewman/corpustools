@@ -35,7 +35,7 @@ def write_lines_to_tarball(tarball, name, lines):
     txt = '\n'.join(lines)
     txt = txt.encode('utf-8')
     with BytesIO(txt) as tar_file:
-        info = tarfile.TarInfo(name = name)
+        info = tf.TarInfo(name = name)
         info.size = len(txt)
         tarball.addfile(info, fileobj = tar_file)
     pass

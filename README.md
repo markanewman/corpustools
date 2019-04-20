@@ -12,7 +12,7 @@ pip install git+https://github.com/markanewman/corpustools.git
 
 ```{py}
 import corpustools.rewrite as ctrw
-import corpustools.measure as ctm;
+import corpustools.measure as ctm
 ```
 
 ## Single corpus tools
@@ -29,8 +29,14 @@ ctm.frequency_counts('d:/working/corpus.tar')
 ```{py}
 ctm.coverage('d:/working/corpus.tar', 'd:/working/tokens.csv')
 ```
-- [ ] Filter out words
-- [ ] Filter in words
+- [x] Filter in words
+```{py}
+ctm.filter_in_tokens('d:/working/corpus.tar', 'd:/working/tokens.csv')
+```
+- [x] Filter out words
+```{py}
+ctm.filter_out_tokens('d:/working/corpus.tar', 'd:/working/tokens.csv')
+```
 - [ ] Split corpus into sub corpuses based on known split
 - [x] Extract corpus into blocks of ~1M lines
 ```{py}
