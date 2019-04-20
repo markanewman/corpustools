@@ -1,8 +1,5 @@
 import pathlib
-import progressbar
-import tarfile
-from ..utils.tarfile import list_tar_files, read_lines_from_tar_file
-from os.path import getsize
+from ..utils.tarfile import file_in_corpus, read_lines_from_tar_file
 
 def tar_to_block_text(corpus, line_count):
     """
@@ -32,34 +29,27 @@ def tar_to_block_text(corpus, line_count):
     lines_buffer = {}
     lines_buffer_count = 0
 
-    widgets = [ 'Converting: ', progressbar.Percentage(), ' ', progressbar.Bar(marker = '.', left = '[', right = ']'), ' ', progressbar.ETA() ]
+    for (tar_info, tar_file) in file_in_corpus(corpus):
+        lines = read_lines_from_tar_file(tar_file)
+        lines = [line.strip() for line in lines]
+        lines = [line + '\n' for line in lines if len(line) > 0]
 
-    with progressbar.ProgressBar(widgets = widgets, max_value = getsize(corpus)) as bar:
-        with tarfile.open(corpus, 'r') as corpus:
-            for (tar_info, tar_file) in list_tar_files(corpus):
-                lines = read_lines_from_tar_file(tar_file)
-                lines = [line.strip() for line in lines]
-                lines = [line + '\n' for line in lines if len(line) > 0]
+        lines_buffer[tar_info.name] = lines
+        lines_buffer_count = lines_buffer_count + len(lines)
 
-                lines_buffer[tar_info.name] = lines
-                lines_buffer_count = lines_buffer_count + len(lines)
-
-                if lines_buffer_count >= line_count:
-                    file_count = file_count + 1
-                    file = root.joinpath('./part-{0:06d}.txt'.format(file_count))
-                    with open(file, 'w', encoding = 'utf-8', newline = '') as file:
-                        for key in lines_buffer:
-                            file.writelines(['------ {0} ------\n'.format(key)])
-                            file.writelines(lines_buffer[key])
-                            pass
-                        pass
-                    lines_buffer = {}
-                    lines_buffer_count = 0
-
-                bar.update(tar_info.offset_data + tar_info.size)
-            pass
-        pass
+        if lines_buffer_count >= line_count:
+            file_count = file_count + 1
+            file = root.joinpath('./part-{0:06d}.txt'.format(file_count))
+            with open(file, 'w', encoding = 'utf-8', newline = '') as file:
+                for key in lines_buffer:
+                    file.writelines(['------ {0} ------\n'.format(key)])
+                    file.writelines(lines_buffer[key])
+                    pass
+                pass
+            lines_buffer = {}
+            lines_buffer_count = 0
     pass
+
 
 def _delete_folder(pth) :
     for sub in pth.iterdir() :

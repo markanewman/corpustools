@@ -1,5 +1,7 @@
-import tarfile
+import progressbar as pb
+import tarfile as tf
 from io import BytesIO
+from os.path import getsize
 
 def list_tar_files(tar_ball):
     """
@@ -36,4 +38,17 @@ def write_lines_to_tarball(tarball, name, lines):
         info = tarfile.TarInfo(name = name)
         info.size = len(txt)
         tarball.addfile(info, fileobj = tar_file)
+    pass
+
+def file_in_corpus(corpus):
+
+    widgets = [ 'Processing: ', pb.Percentage(), ' ', pb.Bar(marker = '.', left = '[', right = ']'), ' ', pb.ETA() ]
+
+    with pb.ProgressBar(widgets = widgets, max_value = getsize(corpus)) as bar:
+        with tf.open(corpus, 'r') as corpus:
+            for (tar_info, tar_file) in list_tar_files(corpus):
+                yield tar_info, tar_file
+                bar.update(tar_info.offset_data + tar_info.size)
+            pass
+        pass
     pass
