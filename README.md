@@ -27,7 +27,7 @@ python -c "import corpustools.rewrite as ctrw; ctrw.tar_to_block_text('d:/workin
 
 ## Multi corpus tools
 
-- [ ] Compute relitive frequency ratio
+- [x] Compute relitive frequency ratio
 ```{shell}
 python -c "import corpustools.measure as ctm; ctm.relitive_frequency_ratio('d:/working/domain.tar', 'd:/working/subdomain.tar')"
 ```
