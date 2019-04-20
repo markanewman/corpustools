@@ -2,6 +2,12 @@
 
 Tools for manipulating a tar file based corpses
 
+# Install
+
+```{shell}
+pip install git+https://github.com/markanewman/corpustools.git
+```
+
 # Tools
 
 ## Single corpus tools
@@ -13,7 +19,10 @@ Tools for manipulating a tar file based corpses
 - [ ] Filter out words
 - [ ] Filter in words
 - [ ] Split corpus into sub corpuses based on known split
-- [ ] Extract corpus into blocks of ~1M lines
+- [x] Extract corpus into blocks of ~1M lines
+```{shell}
+python -c "import corpustools.rewrite as ctrw; ctrw.tar_to_block_text('d:/working/corpus.tar', 1000000)"
+```
 - [ ] Create subcorpus based on exact text string
 
 ## Multi corpus tools

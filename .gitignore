@@ -1,0 +1,11 @@
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+*.[Cc]ache
+__pycache__
+
+# WinMerge
+*.bak
