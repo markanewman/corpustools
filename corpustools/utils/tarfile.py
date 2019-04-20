@@ -42,7 +42,7 @@ def write_lines_to_tarball(tarball, name, lines):
 
 def file_in_corpus(corpus):
 
-    widgets = [ 'Processing: ', pb.Percentage(), ' ', pb.Bar(marker = '.', left = '[', right = ']'), ' ', pb.ETA() ]
+    widgets = [ pb.Percentage(), ' ', pb.Bar(marker = '.', left = '[', right = ']'), ' ', pb.ETA() ]
 
     with pb.ProgressBar(widgets = widgets, max_value = getsize(corpus)) as bar:
         with tf.open(corpus, 'r') as corpus:

@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = 'corpustools',
-    version = '0.0.1',
+    version = '0.0.2',
     description = 'Tools for manipulating a tar file based corpses',
     long_description = long_description,
     long_description_content_type = 'text/markdown',
@@ -25,7 +25,7 @@ setup(
     keywords = 'language-processing data-science corpus-linguistics',
     packages = find_packages(exclude=['contrib', 'docs', 'tests']),
     python_requires='>=3.5, <4',
-    install_requires = [],
+    install_requires = ['progressbar2'],
     project_urls = {
         'Bug Reports': 'https://github.com/markanewman/corpustools/issues',
         'Source': 'https://github.com/markanewman/corpustools/',
