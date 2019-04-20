@@ -1,7 +1,5 @@
-import csv
 import pathlib
-import progressbar as pb
-from ..utils.csvfile import write_dictionary
+from ..utils.csvfile import read_dictionary, write_dictionary
 from ..utils.tarfile import file_in_corpus, read_lines_from_tar_file
 
 def coverage(corpus, tokens, tokenizer = None):
@@ -30,24 +28,11 @@ def coverage(corpus, tokens, tokenizer = None):
     if tokenizer == None:
         tokenizer = lambda line: [token.upper() for token in line.strip().split() if len(token) > 0]
 
-    tokens = _read_tokens(tokens)
+    tokens = set(read_dictionary(tokens).keys())
     measures = _measures(corpus, tokens, tokenizer)
     _write_measures(measures_file, measures)
 
-def _read_tokens(file_name):
 
-    print('Reading tokens...')
-    result = set()
-
-    with open(file_name, 'r', encoding = 'utf-8', newline = '') as file_name:
-        reader = csv.reader(file_name, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_ALL)
-        next(reader, None)
-        for row in reader:
-            result.add(row[0])
-            pass
-        pass
-
-    return result
 
 def _measures(corpus, tokens, tokenizer):
 

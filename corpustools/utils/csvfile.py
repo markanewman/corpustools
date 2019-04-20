@@ -18,3 +18,18 @@ def write_dictionary(file_name, dictionary, value_sort = False, asc_sort = True)
             pass
         pass
     pass
+
+def read_dictionary(file_name):
+
+    print('Reading tokens...')
+    result = {}
+
+    with open(file_name, 'r', encoding = 'utf-8', newline = '') as file_name:
+        reader = csv.reader(file_name, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_ALL)
+        next(reader, None)
+        for row in reader:
+            result[row[0]] = row[1]
+            pass
+        pass
+
+    return result
