@@ -25,7 +25,10 @@ import corpustools.measure as ctm;
 ```{py}
 ctm.frequency_counts('d:/working/corpus.tar')
 ```
-- [] Zif's Law Coverage
+- [x] Zif's Law Coverage
+```{py}
+ctm.coverage('d:/working/corpus.tar', 'd:/working/tokens.csv')
+```
 - [ ] Filter out words
 - [ ] Filter in words
 - [ ] Split corpus into sub corpuses based on known split
