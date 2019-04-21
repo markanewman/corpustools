@@ -17,8 +17,14 @@ import corpustools.measure as ctm
 
 ## Single corpus tools
 
-- [ ] Measure TTR
-- [ ] Measure MATTR
+- [x] Measure TTR
+```{py}
+ctm.TTR('d:/working/corpus.tar')
+```
+- [x] Measure MATTR
+```{py}
+ctm.MATTR('d:/working/corpus.tar')
+```
 - [ ] Count words per sentence/paragraph/document
 - [ ] Count sentences per paragraph/document
 - [x] Unique Words
