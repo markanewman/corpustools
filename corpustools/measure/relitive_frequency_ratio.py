@@ -69,6 +69,7 @@ def _measure(counts_d, counts_s):
     for kvp in counts_s.items(): total_s = total_s + kvp[1]
 
     with pb.ProgressBar(widgets = widgets, max_value = len(counts_s)) as bar:
+        i = 0
         for kvp in counts_s.items():
             vs = kvp[1]
             vd = counts_d[kvp[0]] if kvp[0] in counts_d else 1
