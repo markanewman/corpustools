@@ -1,6 +1,7 @@
 import pathlib
 from ..utils.csvfile import write_dictionary
 from ..utils.tarfile import file_in_corpus, read_lines_from_tar_file
+from statistics import mean
 
 def TTR(corpus, tokenizer = None):
     """
@@ -29,6 +30,8 @@ def TTR(corpus, tokenizer = None):
     measures = _measure_corpus(corpus, tokenizer)
     _write_measures(measures_file, measures)
 
+    return (measures_file, mean(measures.values()))
+
 def _measure_corpus(corpus, tokenizer):
 
     print('Measuring TTR...')
@@ -49,7 +52,7 @@ def _measure_document(tokens):
     else:
         ttr = len(set(tokens)) / l
         pass
-    return round(ttr,8)
+    return round(ttr, 8)
 
 def _write_measures(file_name, measures):
 

@@ -2,6 +2,7 @@ import pathlib
 import progressbar as pb
 from ..utils.csvfile import write_dictionary
 from ..utils.tarfile import file_in_corpus, read_lines_from_tar_file
+from statistics import mean
 
 def relitive_frequency_ratio(domain_corpus, subdomain_corpus, tokenizer = None):
     """
@@ -35,6 +36,8 @@ def relitive_frequency_ratio(domain_corpus, subdomain_corpus, tokenizer = None):
     subdomain_counts = _collect_counts(subdomain_corpus, tokenizer)
     measures = _measure(domain_counts, subdomain_counts)
     _write_measures(measures_file, measures)
+
+    return (measures_file, mean(measures.values()))
 
 def _collect_counts(corpus, tokenizer):
 

@@ -1,6 +1,7 @@
 import pathlib
 from ..utils.csvfile import read_dictionary, write_dictionary
 from ..utils.tarfile import file_in_corpus, read_lines_from_tar_file
+from statistics import mean
 
 def coverage(corpus, tokens, tokenizer = None):
     """
@@ -32,7 +33,7 @@ def coverage(corpus, tokens, tokenizer = None):
     measures = _measures(corpus, tokens, tokenizer)
     _write_measures(measures_file, measures)
 
-
+    return (measures_file, mean(measures.values()))
 
 def _measures(corpus, tokens, tokenizer):
 

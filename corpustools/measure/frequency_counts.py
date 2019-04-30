@@ -2,6 +2,7 @@ import pathlib
 import progressbar as pb
 from ..utils.csvfile import write_dictionary
 from ..utils.tarfile import file_in_corpus, read_lines_from_tar_file
+from statistics import mean
 
 def frequency_counts(corpus, tokenizer = None):
     """
@@ -29,6 +30,8 @@ def frequency_counts(corpus, tokenizer = None):
 
     counts = _collect_counts(corpus, tokenizer)
     _write_measures(measures_file, counts)
+
+    return (measures_file, mean(counts.values()))
 
 def _collect_counts(corpus, tokenizer):
 

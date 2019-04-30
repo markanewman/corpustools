@@ -32,6 +32,8 @@ def MATTR(corpus, n = 500, tokenizer = None):
     measures = _measure_corpus(corpus, n, tokenizer)
     _write_measures(measures_file, measures)
 
+    return (measures_file, mean(measures.values()))
+
 def _measure_corpus(corpus, n, tokenizer):
 
     print('Measuring MATTR...')
