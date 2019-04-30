@@ -48,8 +48,9 @@ def tar_to_block_text(corpus, line_count):
                 pass
             lines_buffer = {}
             lines_buffer_count = 0
-    pass
+        pass
 
+    return root
 
 def _delete_folder(pth) :
     for sub in pth.iterdir() :

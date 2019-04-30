@@ -33,6 +33,8 @@ def filter_in_tokens(corpus, tokens, tokenizer = None):
     tokens = set(read_dictionary(tokens).keys())
     _rewrite(corpus, tokens, tokenizer, rewrite_tarball)
 
+    return rewrite_tarball
+
 def _rewrite(corpus, tokens, tokenizer, tar_ball_out):
 
     print('Re-Writing Corpus...')
