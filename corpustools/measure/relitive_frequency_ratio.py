@@ -61,14 +61,14 @@ def _measure(counts_d, counts_s):
     print('Measuring Relitive Frequency Ratios...')
     result = {}
 
-    widgets = ['---% ', pb.BouncingBar(marker = '.', left = '[', right = ']'), ' Time: --:--:--' ]
+    widgets = [ pb.Percentage(), ' ', pb.Bar(marker = '.', left = '[', right = ']'), ' ', pb.ETA() ]
 
     total_d = 0
     total_s = 0
     for kvp in counts_d.items(): total_d = total_d + kvp[1]
     for kvp in counts_s.items(): total_s = total_s + kvp[1]
 
-    with pb.ProgressBar(widgets = widgets) as bar:
+    with pb.ProgressBar(widgets = widgets, max_value = len(counts_s)) as bar:
         for kvp in counts_s.items():
             vs = kvp[1]
             vd = counts_d[kvp[0]] if kvp[0] in counts_d else 1
@@ -76,7 +76,8 @@ def _measure(counts_d, counts_s):
             if rfr > 1:
                 pass
                 result[kvp[0]] = round(rfr, 8)
-            pass
+            i = i + 1
+            bar.update(i)
         pass
 
     return result
