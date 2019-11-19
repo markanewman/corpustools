@@ -1,58 +1,70 @@
-# corpustools
+Tools for calculating linguistic measures
 
-Tools for manipulating a tar file based corpses
+# Measures
 
-# Install
+There are 3 ways to calculate every measure:
 
-```{shell}
-pip install git+https://github.com/markanewman/corpustools.git
-```
+* One file at a time
+* One folder at a time
+* One tar file at a time
 
-# Tools
+Folders and tar files are effectivaly the same thing.
+Tar files are much more convient when transfering corpuses via sneaker-net.
+So offer the ability to calculate on them directly.
 
-```{py}
-import corpustools.rewrite as ctrw
-import corpustools.measure as ctm
-```
+Below can be found a list of measures.
+The listed syntax is for a single file.
+When calculating over a folder (or tar file) use `python [folder|tar]corpus.py -m(easure) [{{measure name}}] -in {{folder path|tar path}} -out {{measures path}}`
 
-## Single corpus tools
+Tokenization is always performed the same way:
 
-- [x] Measure TTR
-```{py}
-ctm.TTR('d:/working/corpus.tar')
-```
-- [x] Measure MATTR
-```{py}
-ctm.MATTR('d:/working/corpus.tar')
-```
-- [ ] Count words per sentence/paragraph/document
-- [ ] Count sentences per paragraph/document
-- [x] Unique Words
-```{py}
-ctm.frequency_counts('d:/working/corpus.tar')
-```
-- [x] Zif's Law Coverage
-```{py}
-ctm.coverage('d:/working/corpus.tar', 'd:/working/tokens.csv')
-```
-- [x] Filter in words
-```{py}
-ctm.filter_in_tokens('d:/working/corpus.tar', 'd:/working/tokens.csv')
-```
-- [x] Filter out words
-```{py}
-ctm.filter_out_tokens('d:/working/corpus.tar', 'd:/working/tokens.csv')
-```
-- [ ] Split corpus into sub corpuses based on known split
-- [x] Extract corpus into blocks of ~1M lines
-```{py}
-ctrw.tar_to_block_text('d:/working/corpus.tar', 1000000)"
-```
-- [ ] Create subcorpus based on exact text string
+* Words are seperated by a single space
+* Puncunation is left as-is where-is.
+  i.e. "See Bob run ." tokenizes to `['See', 'Bob', 'run', '.']` vs. "See Bob run." tokenizes to `['See', 'Bob', 'run.']`
+* One sentence per line
+* Pargraphes have a single enter seperating them
 
-## Multi corpus tools
 
-- [x] Compute relitive frequency ratio
-```{py}
-ctm.relitive_frequency_ratio('d:/working/domain.tar', 'd:/working/subdomain.tar')
-```
+| Name | Status | Command |
+|--- |--- |--- 
+| Basic | | `python basic.py -f(ile) c:\foo.txt`
+| Counts | | `python counts.py -f(ile) c:\foo.txt`
+| TTR |  | `python ttr.py -f(ile) c:\foo.txt`
+| MATTR |  | `python mattr.py -f(ile) c:\foo.txt`
+| Coverage | | `python coverage.py -f(ile) c:\foo.txt -dict c:\zipfs.csv` 
+
+**Basic**: Basic document lengths: words/document, sentences/document, paragraphs/document, mean words/sentence, mean words/paragraph, and mean sentences/paragraph
+
+**Counts**: List of all the unique words and their total word counts.
+Unlike other measures, this measure produces a list of results, not just one.
+
+**TTR**: [Type-Token Ratio](https://en.wikipedia.org/wiki/Lexical_density)
+
+**MATTR**: [Moving Average Type-Token Ratio](https://doi.org/10.1080/09296171003643098)
+
+**Coverage**: What percentage of the document is accounted for by the given dictionary.
+Most useful when testing [Zipf's Law](https://en.wikipedia.org/wiki/Zipf%27s_law)
+
+# Transform
+
+In addtion to the measures above, several bulk transformation tools are available as below.
+Folder (and tar file) processing are available too using the `-t(ransform) {{transform name}}` argument.
+
+| Name | Status | Command |
+|--- |--- |--- 
+| ToLower | | 
+| Stem | | 
+| FilterIn | | 
+| FilterOut | | 
+
+**ToLower**: Lowercases the entire file.
+
+**Stem**: Stems all words in the file.
+
+**FilterIn**: Filters the file, _KEEPING_ all words in the given dictionary.
+Be careful of puncunation.
+Be careful of case.
+
+**FilterOut**: Filters the file, _DISCARDING_ all words in the given dictionary.
+Be careful of puncunation.
+Be careful of case.
