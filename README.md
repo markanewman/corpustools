@@ -1,70 +1,38 @@
-Tools for calculating linguistic measures
+# Linguistic Measures
 
-# Measures
+Tools for calculating linguistic measures and other useful utilities.
 
-There are 3 ways to calculate every measure:
+# Tabula rasa
 
-* One file at a time
-* One folder at a time
-* One tar file at a time
+* Usage on measures can be found [here](./measures/README.md)
+* Usage on transformations can be found [here](./transforms/README.md)
+* Usage on tools can be found [here](./tools/README.md)
+* If you use these measures in an acedemic work, consider adding in one of [these](./references.bib) refrences.
 
-Folders and tar files are effectivaly the same thing.
-Tar files are much more convient when transfering corpuses via sneaker-net.
-So offer the ability to calculate on them directly.
+# Prerequsits
 
-Below can be found a list of measures.
-The listed syntax is for a single file.
-When calculating over a folder (or tar file) use `python [folder|tar]corpus.py -m(easure) [{{measure name}}] -in {{folder path|tar path}} -out {{measures path}}`
+The following packages need to be installed.
+I recomend using [Chocolatey](https://chocolatey.org/install).
+After [Python][python] is installed, the prerequsit packages need installed too.
+If you want to modify the code, I recomend [VS Code][vscode].
 
-Tokenization is always performed the same way:
+* [Python][python]
+* [VS Code][vscode] along with the below plugins
+  * Python by Microsoft.
 
-* Words are seperated by a single space
-* Puncunation is left as-is where-is.
-  i.e. "See Bob run ." tokenizes to `['See', 'Bob', 'run', '.']` vs. "See Bob run." tokenizes to `['See', 'Bob', 'run.']`
-* One sentence per line
-* Pargraphes have a single enter seperating them
+```{ps1}
+if('Unrestricted' -ne (Get-ExecutionPolicy)) { Set-ExecutionPolicy Bypass -Scope Process -Force }
+iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+refreshenv
 
+choco install python3  -y
+refreshenv
+pip install -r requirements.txt
 
-| Name | Status | Command |
-|--- |--- |--- 
-| Basic | | `python basic.py -f(ile) c:\foo.txt`
-| Counts | | `python counts.py -f(ile) c:\foo.txt`
-| TTR |  | `python ttr.py -f(ile) c:\foo.txt`
-| MATTR |  | `python mattr.py -f(ile) c:\foo.txt`
-| Coverage | | `python coverage.py -f(ile) c:\foo.txt -dict c:\zipfs.csv` 
+choco install vscode -y
+refreshenv
+code --install-extension ms-python.python
+```
 
-**Basic**: Basic document lengths: words/document, sentences/document, paragraphs/document, mean words/sentence, mean words/paragraph, and mean sentences/paragraph
-
-**Counts**: List of all the unique words and their total word counts.
-Unlike other measures, this measure produces a list of results, not just one.
-
-**TTR**: [Type-Token Ratio](https://en.wikipedia.org/wiki/Lexical_density)
-
-**MATTR**: [Moving Average Type-Token Ratio](https://doi.org/10.1080/09296171003643098)
-
-**Coverage**: What percentage of the document is accounted for by the given dictionary.
-Most useful when testing [Zipf's Law](https://en.wikipedia.org/wiki/Zipf%27s_law)
-
-# Transform
-
-In addtion to the measures above, several bulk transformation tools are available as below.
-Folder (and tar file) processing are available too using the `-t(ransform) {{transform name}}` argument.
-
-| Name | Status | Command |
-|--- |--- |--- 
-| ToLower | | 
-| Stem | | 
-| FilterIn | | 
-| FilterOut | | 
-
-**ToLower**: Lowercases the entire file.
-
-**Stem**: Stems all words in the file.
-
-**FilterIn**: Filters the file, _KEEPING_ all words in the given dictionary.
-Be careful of puncunation.
-Be careful of case.
-
-**FilterOut**: Filters the file, _DISCARDING_ all words in the given dictionary.
-Be careful of puncunation.
-Be careful of case.
+python: https://www.python.org/downloads/windows
+vscode: https://code.visualstudio.com/Download
