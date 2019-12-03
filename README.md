@@ -34,5 +34,5 @@ refreshenv
 code --install-extension ms-python.python
 ```
 
-python: https://www.python.org/downloads/windows
-vscode: https://code.visualstudio.com/Download
+[python]: https://www.python.org/downloads/windows
+[vscode]: https://code.visualstudio.com/Download
