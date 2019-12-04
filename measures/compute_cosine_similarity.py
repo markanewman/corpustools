@@ -52,7 +52,7 @@ def process_all_files(folder_in, measure_out):
     folder_in = pathlib.Path(folder_in)
     measure_out = pathlib.Path(measure_out)
 
-    i = 0
+    i = 1
     widgets = [ 'Processing File # ', pb.Counter(), ' ', pb.Timer(), ' ', pb.BouncingBar(marker = '.', left = '[', right = ']')]
     with pb.ProgressBar(widgets = widgets) as bar:
         with measure_out.open('w', encoding = 'utf-8', newline='') as measure_out:
