@@ -17,6 +17,7 @@ After [Python][python] is installed, the prerequsit packages need installed too.
 If you want to modify the code, I recomend [VS Code][vscode].
 
 * [Python][python]
+  * I tested this on version 3.8 so YMMV.    
 * [VS Code][vscode] along with the below plugins
   * Python by Microsoft.
 

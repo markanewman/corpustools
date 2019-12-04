@@ -50,28 +50,29 @@ def process_all_files(folder_in, measure_out, window_length):
     measure_out = pathlib.Path(measure_out)
 
     i = 0
-    widgets = [ 'Processing File #', pb.Counter(), ' ', pb.Timer(), ' ', pb.BouncingBar(marker = '.', left = '[', right = ']')]
+    widgets = [ 'Processing File # ', pb.Counter(), ' ', pb.Timer(), ' ', pb.BouncingBar(marker = '.', left = '[', right = ']')]
     with pb.ProgressBar(widgets = widgets) as bar:
         with measure_out.open('w', encoding = 'utf-8', newline='') as measure_out:
             writer = csv.writer(measure_out, delimiter = ',', quotechar = '"', quoting = csv.QUOTE_ALL)
             writer.writerow(['filename', f'mattr{window_length}'])
-            for file_name in folder_in.iterdir() if file_name.is_file():
-                bar.update(i)
-                i = i + 1
+            for file_name in folder_in.iterdir():
+                 if file_name.is_file():
+                    bar.update(i)
+                    i = i + 1
 
-                file_in = file_name
-                with file_in.open('r', encoding = 'utf-8') as file_in:
-                    lines = [line.strip().split() for line in file_in.readlines()]
-                
-                tokens = [x for y in lines for x in y]
-                result = round(compute_mattr(tokens, window_length), 8)
-                writer.writerow([file_name.name, result])
+                    file_in = file_name
+                    with file_in.open('r', encoding = 'utf-8') as file_in:
+                        lines = [line.strip().split() for line in file_in.readlines()]
+                    
+                    tokens = [x for y in lines for x in y]
+                    result = round(compute_mattr(tokens, window_length), 8)
+                    writer.writerow([file_name.name, result])
 
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('-in', '--folder-in', help = 'Folder to import files from', required = True)
     parser.add_argument('-out', '--measure-out', help = 'File used to save the measures', required = True)
-    parser.add_argument('len', '--window_length', help = 'The window length to use for the moving average', required = True)
+    parser.add_argument('-len', '--window_length', help = 'The window length to use for the moving average', required = True, type = int)
     args = parser.parse_args()
     print(f'folder in: {args.folder_in}')
     print(f'measure out: {args.measure_out}')
