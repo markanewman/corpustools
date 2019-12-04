@@ -4,6 +4,7 @@ import math
 import pathlib
 import progressbar as pb
 import statistics as stats
+import string
 
 def compute_tf(lines):
     tf = {}
