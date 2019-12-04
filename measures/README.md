@@ -45,3 +45,4 @@ Most useful when testing [Zipf's Law](https://en.wikipedia.org/wiki/Zipf%27s_law
 **Cosine Similarity**: Computes the cosine similarity between the document vector and the sentence vector.
 Records both the mean and standard deviation.
 Filters out empty lines before calculation.
+The smoothed version of IDF is used in the calculation.

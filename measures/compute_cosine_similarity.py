@@ -25,7 +25,7 @@ def compute_idf(lines):
         for token in line:
             if token not in idf:
                 lines_with_token_count = sum(1 for line in lines if token in line)
-                idf[token] = math.log(line_count / (1 + lines_with_token_count))
+                idf[token] = 1 + math.log(line_count / (1 + lines_with_token_count))
 
     return idf
 
