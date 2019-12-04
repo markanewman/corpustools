@@ -72,7 +72,7 @@ def process_all_files(folder_in, measure_out):
                     idf = compute_idf(lines)
                     result = compute_cosine_similarity(lines,  idf)
                     result_mean = stats.mean(result)
-                    result_sd = stats.stdev(result)
+                    result_sd = stats.stdev(result) if len(result) > 1 else 0
                     writer.writerow([file_name.name, result_mean, result_sd])
 
 if __name__ == '__main__':
