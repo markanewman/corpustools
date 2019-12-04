@@ -19,7 +19,7 @@ Unless otherwise noted, single punctuation tokens are filtered out.
 
 | Name | Command |
 |--- |--- 
-| Basic | 
+| Basic | `python compute_basic.py -in d:/sample -out d:/ttr.csv`
 | Counts | 
 | TTR |  `python compute_ttr.py -in d:/sample -out d:/ttr.csv`
 | MATTR | `python compute_mattr.py -len 500 -in d:/sample -out d:/mattr.csv`
@@ -28,7 +28,7 @@ Unless otherwise noted, single punctuation tokens are filtered out.
 
 Remember to be in the `./measures` folder before running the commands.
 
-**Basic**: Basic document lengths: words/document, sentences/document, paragraphs/document, mean words/sentence, mean words/paragraph, and mean sentences/paragraph
+**Basic**: Basic document lengths: paragraphs/document, sentences/document, and words/document
 
 **Counts**: List of all the unique words and their total word counts.
 Unlike other measures, this measure produces a list of results for the whole folder, not by-file.
