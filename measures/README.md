@@ -19,12 +19,12 @@ Unless otherwise noted, single punctuation tokens are filtered out.
 
 | Name | Command |
 |--- |--- 
-| Basic | `python compute_basic.py -in d:/sample -out d:/ttr.csv`
+| Basic | `python compute_basic.py -in d:/sample -out d:/sample.basic.csv`
 | Counts | 
-| TTR |  `python compute_ttr.py -in d:/sample -out d:/ttr.csv`
-| MATTR | `python compute_mattr.py -len 500 -in d:/sample -out d:/mattr.csv`
+| TTR |  `python compute_ttr.py -in d:/sample -out d:/sample.ttr.csv`
+| MATTR | `python compute_mattr.py -len 500 -in d:/sample -out d:/sample.mattr500.csv`
 | Coverage | 
-| Cosine Similarity | `python compute_cosine_similarity.py -in d:/sample -out d:/cosine.csv`
+| Cosine Similarity | `python compute_cosine_similarity.py -in d:/sample -out d:/sample.cosine.csv`
 
 Remember to be in the `./measures` folder before running the commands.
 
