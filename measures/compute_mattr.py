@@ -63,6 +63,8 @@ def process_all_files(folder_in, measure_out, window_length):
                     file_in = file_name
                     with file_in.open('r', encoding = 'utf-8') as file_in:
                         lines = [line.strip().split() for line in file_in.readlines()]
+                        lines = [line for line in lines if len(line) > 0]
+                        lines = [[token for token in line if token not in string.punctuation] for line in lines]
                     
                     tokens = [x for y in lines for x in y]
                     result = round(compute_mattr(tokens, window_length), 8)

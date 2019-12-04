@@ -64,8 +64,9 @@ def process_all_files(folder_in, measure_out):
 
                     file_in = file_name
                     with file_in.open('r', encoding = 'utf-8') as file_in:
-                        lines = [line.strip().split() for line in file_in.readlines()]                    
+                        lines = [line.strip().split() for line in file_in.readlines()]
                         lines = [line for line in lines if len(line) > 0]
+                        lines = [[token for token in line if token not in string.punctuation] for line in lines]
                     
                     idf = compute_idf(lines)
                     result = compute_cosine_similarity(lines,  idf)
@@ -74,10 +75,11 @@ def process_all_files(folder_in, measure_out):
                     writer.writerow([file_name.name, result_mean, result_sd])
 
 if __name__ == '__main__':
-    parser = ArgumentParser()
-    parser.add_argument('-in', '--folder-in', help = 'Folder to import files from', required = True)
-    parser.add_argument('-out', '--measure-out', help = 'File used to save the measures', required = True)
-    args = parser.parse_args()
-    print(f'folder in: {args.folder_in}')
-    print(f'measure out: {args.measure_out}')
-    process_all_files(args.folder_in, args.measure_out)
+    # parser = ArgumentParser()
+    # parser.add_argument('-in', '--folder-in', help = 'Folder to import files from', required = True)
+    # parser.add_argument('-out', '--measure-out', help = 'File used to save the measures', required = True)
+    # args = parser.parse_args()
+    # print(f'folder in: {args.folder_in}')
+    # print(f'measure out: {args.measure_out}')
+    # process_all_files(args.folder_in, args.measure_out)
+    process_all_files('d:/oas/tokenized', 'd:/oas/oas.cosine.csv')
